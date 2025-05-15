@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Telegram Bot Manager</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="app-container">
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <i class="fab fa-telegram"></i>
+        <h1>Telegram Manager</h1>
+      </div>
+      <nav class="sidebar-nav">
+        <button class="nav-item active" data-section="accounts">
+          <i class="fas fa-user"></i>
+          <span>Accounts</span>
+        </button>
+        <button class="nav-item" data-section="chats">
+          <i class="fas fa-comments"></i>
+          <span>Chats</span>
+        </button>
+
+      <div class="sidebar-footer">
+        <div class="config-buttons">
+          <button id="loadConfig" class="btn primary">
+            <i class="fas fa-paste"></i>
+            <span>Загрузить конфиг</span>
+          </button>
+          <button id="saveConfig" class="btn success">
+            <i class="fas fa-copy"></i>
+            <span>Скопировать конфиг</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="main-content">
+      <!-- Accounts Section -->
+      <section id="accounts" class="content-section active">
+        <div class="section-header">
+          <div class="title-with-actions">
+            <h2>Telegram Accounts & Proxies</h2>
+            <button id="addAccount" class="btn primary">
+              <i class="fas fa-plus"></i>
+              <span>Add Account</span>
+            </button>
+            <button id="addProxy" class="btn secondary">
+              <i class="fas fa-plus"></i>
+              <span>Add Proxy</span>
+            </button>
+          </div>
+        </div>
+        
+        <div class="account-proxy-tabs">
+          <button class="account-proxy-tab active" data-tab="accounts-tab">Accounts</button>
+          <button class="account-proxy-tab" data-tab="proxies-tab">Proxies</button>
+        </div>
+        
+        <div id="accounts-tab" class="account-proxy-content active">
+          <div class="cards-grid" id="accountsList">
+            <!-- Sample Account Card -->
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">Main Account</div>
+                <div class="card-actions">
+                  <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                  <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                </div>
+              </div>
+              <div class="card-content">
+                <div class="card-info"><strong>Phone:</strong> +1234567890</div>
+                <div class="card-info"><strong>Session:</strong> session_name.session</div>
+                <div class="card-tag">SOCKS5 Proxy</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div id="proxies-tab" class="account-proxy-content">
+          <div class="cards-grid" id="proxyList">
+            <!-- Sample Proxy Card -->
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">EU Proxy</div>
+                <div class="card-actions">
+                  <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                  <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                </div>
+              </div>
+              <div class="card-content">
+                <div class="card-info"><strong>Type:</strong> SOCKS5</div>
+                <div class="card-info"><strong>Host:</strong> proxy.example.com:1080</div>
+                <div class="card-tag">SOCKS5</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Chats Section -->
+      <section id="chats" class="content-section">
+        <div class="section-header">
+          <div class="title-with-actions">
+            <h2>Chat Settings</h2>
+            <button id="addChat" class="btn primary">
+              <i class="fas fa-plus"></i>
+              <span>Add Chat</span>
+            </button>
+          </div>
+        </div>
+        <div class="cards-grid" id="chatList">
+          <!-- Sample Chat Card -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Crypto Group</div>
+              <div class="card-actions">
+                <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+              </div>
+            </div>
+            <div class="card-content">
+              <div class="card-info"><strong>ID:</strong> @crypto_group</div>
+              <div class="card-info"><strong>Message:</strong> Hello crypto enthusiasts! Check out our...</div>
+              <div class="card-info"><strong>Account:</strong> Main Account</div>
+              <div class="card-info"><strong>Times:</strong> 09:00, 15:00, 21:00</div>
+              <div class="card-tag success">With Photo</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Schedule Section -->
+      <section id="schedule" class="content-section">
+        <div class="section-header">
+          <div class="title-with-actions">
+            <h2>Posting Schedule</h2>
+            <button id="addScheduleGroup" class="btn primary">
+              <i class="fas fa-plus"></i>
+              <span>Add Schedule</span>
+            </button>
+          </div>
+        </div>
+        <div class="cards-grid" id="scheduleList">
+          <!-- Sample Schedule Card -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Morning Posts</div>
+              <div class="card-actions">
+                <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+              </div>
+            </div>
+            <div class="card-content">
+              <div class="card-info"><strong>Account:</strong> Main Account</div>
+              <div class="card-info"><strong>Chat:</strong> Crypto Group</div>
+              <div class="card-info"><strong>Times:</strong> 09:00, 11:30</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Account Modal -->
+    <div id="accountModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Add Account</h2>
+          <span class="close">&times;</span>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="accountName">Account Name</label>
+            <input type="text" id="accountName" class="form-control" placeholder="Enter a name for this account">
+          </div>
+          <div class="form-group">
+            <label for="apiId">API ID</label>
+            <input type="text" id="apiId" class="form-control" placeholder="Enter API ID">
+          </div>
+          <div class="form-group">
+            <label for="apiHash">API Hash</label>
+            <input type="text" id="apiHash" class="form-control" placeholder="Enter API Hash">
+          </div>
+          <div class="form-group">
+            <label for="phoneNumber">Phone Number</label>
+            <input type="text" id="phoneNumber" class="form-control" placeholder="+1234567890">
+          </div>
+          <div class="form-group">
+            <label for="sessionFile">Session File Path</label>
+            <input type="text" id="sessionFile" class="form-control" placeholder="/path/to/session.session">
+          </div>
+          
+          <div class="proxy-toggle">
+            <div class="proxy-toggle-header">
+              <label>
+                <input type="checkbox" id="useProxyCheck">
+                Use Proxy
+              </label>
+            </div>
+            <div class="proxy-toggle-content">
+              <div class="form-group">
+                <label for="proxySelect">Select Existing Proxy</label>
+                <select id="proxySelect" class="form-control">
+                  <option value="">No Proxy</option>
+                  <option value="eu_proxy">EU Proxy</option>
+                  <option value="us_proxy">US Proxy</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="saveAccount" class="btn success">Save</button>
+          <button id="cancelAccount" class="btn danger">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chat Modal -->
+    <div id="chatModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Add Chat</h2>
+          <span class="close">&times;</span>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="chatName">Chat Name</label>
+            <input type="text" id="chatName" class="form-control" placeholder="Enter chat name">
+          </div>
+          <div class="form-group">
+            <label for="chatId">Chat ID or Username</label>
+            <input type="text" id="chatId" class="form-control" placeholder="Enter chat ID or @username">
+          </div>
+          <div class="form-group">
+            <label for="messageContent">Message Content</label>
+            <div class="editor-toolbar">
+              <button type="button" class="toolbar-btn" data-format="bold"><i class="fas fa-bold"></i></button>
+              <button type="button" class="toolbar-btn" data-format="italic"><i class="fas fa-italic"></i></button>
+              <button type="button" class="toolbar-btn" data-format="link"><i class="fas fa-link"></i></button>
+              <button type="button" class="toolbar-btn" data-format="emoji"><i class="far fa-smile"></i></button>
+            </div>
+            <textarea id="messageContent" class="form-control message-editor" placeholder="Enter message content"></textarea>
+          </div>
+          <div class="form-group">
+            <label>
+              <input type="checkbox" id="sendPhotoCheck" checked>
+              Send Photo with Message
+            </label>
+            <div id="photoUrlField" class="photo-url-field visible">
+              <input type="text" id="photoUrl" class="form-control" placeholder="Enter photo URL" value="https://i.imgur.com/69h9rbw.jpeg">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="chatAccountSelect">Account for Posting</label>
+            <select id="chatAccountSelect" class="form-control">
+              <option value="">Select an account</option>
+              <option value="main_account">Main Account</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Posting Times</label>
+            <div class="time-selector" id="chatTimeSelector">
+              <div class="time-item">
+                <input type="number" min="0" max="23" value="9" class="time-hour"> :
+                <input type="number" min="0" max="59" value="0" class="time-minute">
+                <button class="action-btn delete-time"><i class="fas fa-times"></i></button>
+              </div>
+              <div class="add-time" id="addChatTime">
+                <i class="fas fa-plus"></i> Add Time
+              </div>
+            </div>
+          </div>
+          
+          <!-- Test Message Section -->
+          <div class="test-message-section">
+            <div class="form-group">
+              <label>
+                <input type="checkbox" id="enableTestMode">
+                Enable Test Mode
+              </label>
+            </div>
+            <div id="testModeOptions" class="test-mode-options">
+              <div class="form-group">
+                <label for="testInterval">Test Interval (seconds)</label>
+                <input type="number" id="testInterval" class="form-control" min="5" value="5">
+              </div>
+              <div class="form-group">
+                <button id="startTestBtn" class="btn primary">Start Test</button>
+                <button id="stopTestBtn" class="btn danger" style="display: none;">Stop Test</button>
+              </div>
+              <div class="test-status" id="testStatus"></div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="saveChat" class="btn success">Save</button>
+          <button id="cancelChat" class="btn danger">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Proxy Modal -->
+    <div id="proxyModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Add Proxy</h2>
+          <span class="close">&times;</span>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="proxyName">Proxy Name</label>
+            <input type="text" id="proxyName" class="form-control" placeholder="Enter a name for this proxy">
+          </div>
+          <div class="form-group">
+            <label for="proxyType">Proxy Type</label>
+            <select id="proxyType" class="form-control">
+              <option value="socks5">SOCKS5</option>
+              <option value="socks4">SOCKS4</option>
+              <option value="http">HTTP</option>
+              <option value="mtproto">MTProto</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="proxyHost">Host</label>
+            <input type="text" id="proxyHost" class="form-control" placeholder="proxy.example.com">
+          </div>
+          <div class="form-group">
+            <label for="proxyPort">Port</label>
+            <input type="number" id="proxyPort" class="form-control" placeholder="1080">
+          </div>
+          <div class="form-group">
+            <label for="proxyUsername">Username (Optional)</label>
+            <input type="text" id="proxyUsername" class="form-control" placeholder="username">
+          </div>
+          <div class="form-group">
+            <label for="proxyPassword">Password (Optional)</label>
+            <input type="password" id="proxyPassword" class="form-control" placeholder="password">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="saveProxy" class="btn success">Save</button>
+          <button id="cancelProxy" class="btn danger">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Link Dialog -->
+    <div id="linkDialog" class="link-dialog" style="display: none;">
+      <div class="link-dialog-header">Insert Link</div>
+      <div class="form-group">
+        <label for="linkText">Text</label>
+        <input type="text" id="linkText" class="form-control" placeholder="Link text">
+      </div>
+      <div class="form-group">
+        <label for="linkUrl">URL</label>
+        <input type="text" id="linkUrl" class="form-control" placeholder="https://example.com">
+      </div>
+      <div class="link-dialog-actions">
+        <button id="cancelLink" class="btn danger">Cancel</button>
+        <button id="insertLink" class="btn success">Insert</button>
+      </div>
+    </div>
+
+    <!-- Emoji Picker -->
+    <div class="emoji-picker" id="emojiPicker" style="display: none;">
+      <div class="emoji-categories">
+        <button data-category="smileys" class="active">😀</button>
+        <button data-category="animals">🐶</button>
+        <button data-category="food">🍎</button>
+        <button data-category="travel">✈️</button>
+        <button data-category="symbols">❤️</button>
+      </div>
+      <div class="emoji-container" id="emojiContainer">
+        <!-- Emojis will be loaded here -->
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
